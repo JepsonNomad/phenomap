@@ -1,0 +1,19 @@
+Package: phenomap
+Version: 0.1.1
+Date: 2017-24-10
+Title: A package for projecting satellite-derived phenology in space
+Authors@R: person("Christian", "John", role = c("aut", "cre"),
+                     email = "cjohn@ucdavis.edu")
+Author: Christian John
+Maintainer: Christian John <cjohn@ucdavis.edu>
+Depends: R (>= 3.4.2),
+	dplyr,
+	phenex,
+	plyr,
+	raster,
+	stringr,
+	rgdal
+Description: This takes in a series of multi-layer raster files and returns a phenology projection raster.
+License: GPL (>= 3)
+URL: https://github.com/JepsonNomad/phenocosm
+BugReports: https://github.com/JepsonNomad/phenocosm
