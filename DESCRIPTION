@@ -16,4 +16,4 @@ Depends: R (>= 3.4.2),
 Description: This takes in a series of multi-layer raster files and returns a phenology projection raster.
 License: GPL (>= 3)
 URL: https://github.com/JepsonNomad/phenocosm
-BugReports: https://github.com/JepsonNomad/phenocosm
+BugReports: https://github.com/JepsonNomad/phenocosm/issues
