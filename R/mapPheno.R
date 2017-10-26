@@ -63,8 +63,8 @@ mapPheno <- function(File_List = NA, PhenoFactor = NA,
     }
     if(!is.na(NDVI)){
       if(verbose){print(paste0("Creating NDVI array... ", Sys.time()))}
-      NDVI.Array <- array(dim=c(nrow(matrix(raster(annualcrops[1], band=NDVI))),
-                                ncol(matrix(raster(annualcrops[1], band=NDVI))),
+      NDVI.Array <- array(dim=c(dim(matrix(raster(annualcrops[1])))[1],
+                                dim(matrix(raster(annualcrops[1])))[2],
                                 length(annualcrops)),
                           data=NA)
       for(i in 1:length(annualcrops)){
@@ -90,8 +90,8 @@ mapPheno <- function(File_List = NA, PhenoFactor = NA,
     if(verbose){print("NDVI cleaned")}
     if(!is.na(VIQ)){
       if(verbose){print(paste0("Creating VI Quality array... ", Sys.time()))}
-      VIQ.Array <- array(dim=c(nrow(matrix(raster(annualcrops[1], band=VIQ))),
-                                ncol(matrix(raster(annualcrops[1], band=VIQ))),
+      VIQ.Array <- array(dim=c(dim(matrix(raster(annualcrops[1])))[1],
+                               dim(matrix(raster(annualcrops[1])))[2],
                                 length(annualcrops)),
                           data=NA)
       for(i in 1:length(annualcrops)){
@@ -109,8 +109,8 @@ mapPheno <- function(File_List = NA, PhenoFactor = NA,
     }
     if(!is.na(DOY)){
       if(verbose){print(paste0("Creating Day of Year array... ", Sys.time()))}
-      DOY.Array <- array(dim=c(nrow(matrix(raster(annualcrops[1], band=DOY))),
-                               ncol(matrix(raster(annualcrops[1], band=DOY))),
+      DOY.Array <- array(dim=c(dim(matrix(raster(annualcrops[1])))[1],
+                               dim(matrix(raster(annualcrops[1])))[2],
                                length(annualcrops)),
                          data=NA)
       for(i in 1:length(annualcrops)){
@@ -120,8 +120,8 @@ mapPheno <- function(File_List = NA, PhenoFactor = NA,
     }
     if(!is.na(PR)){
       if(verbose){print(paste0("Creating Pixel Reliability array... ", Sys.time()))}
-      PR.Array <- array(dim=c(nrow(matrix(raster(annualcrops[1], band=PR))),
-                               ncol(matrix(raster(annualcrops[1], band=PR))),
+      PR.Array <- array(dim=c(dim(matrix(raster(annualcrops[1])))[1],
+                              dim(matrix(raster(annualcrops[1])))[2],
                                length(annualcrops)),
                          data=NA)
       for(i in 1:length(annualcrops)){
