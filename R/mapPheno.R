@@ -108,13 +108,15 @@ mapPheno <- function(File_List = NA, PhenoFactor = NA,
       if(verbose){print(paste0("Creating NDVI array... ", Sys.time()))}
       NDVI.Objects.List <- listobjecter(NDVI.List);if(verbose){print("1")}
       NDVI.Stack <- stack(NDVI.Objects.List)
+      NDVI.Stack.df <- as.data.frame(NDVI.Stack, xy=TRUE); if(verbose){print("Raster stack converted to data frame")}
+
       if(verbose){
         print(class(NDVI.Stack))
         print("NDVI.Stack dimensions ")
         print(dim(NDVI.Stack))
         print("2")
         }
-      NDVI.Array <- as.array(NDVI.Stack)
+      NDVI.Array <- as.array(NDVI.Stack.df)
       if(verbose){
         print(dim(NDVI.Array))
         print("3")
