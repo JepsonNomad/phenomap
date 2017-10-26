@@ -48,6 +48,7 @@ mapPheno <- function(File_List = NA, PhenoFactor = NA,
                      verbose = F){
 
   annualcrops <- File_List
+  pos <- environment(mapPheno)
 
   if(verbose){print(paste0("Creating data tiles for each timepoint... ", Sys.time()))}
 
@@ -85,7 +86,7 @@ mapPheno <- function(File_List = NA, PhenoFactor = NA,
   ## This function transforms a list of strings returned by searching for objects
   ## into a list of objects (required for proper stacking)
   listobjecter <- function(x){
-    FinalList <- lapply(X = x, FUN = get)
+    FinalList <- lapply(X = x, FUN = get, envir = pos)
     return(FinalList)
   }
 
