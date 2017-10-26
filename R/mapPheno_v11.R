@@ -84,8 +84,7 @@ mapPheno <- function(File_List = NA, PhenoFactor = NA,
     };if(verbose){print("NDVI cleaned")}
     if(!is.na(VIQ)){
       if(verbose){print(paste0("Creating VI Quality array... ", Sys.time()))}
-      VIQ.Objects.List <- listobjecter(VIQ.List); if(verbose){print("1")}
-      VIQ.Stack <- stack(VIQ.Objects.List); if(verbose){print("2")}
+      VIQ.Stack <- stack(annualcrops, bands = VIQ)
       VIQ.Array <- as.array(VIQ.Stack); if(verbose){print("3")}
 
       first_k_bits <- function(int, k=16) {
@@ -99,14 +98,12 @@ mapPheno <- function(File_List = NA, PhenoFactor = NA,
     }
     if(!is.na(DOY)){
       if(verbose){print(paste0("Creating Day of Year array... ", Sys.time()))}
-      DOY.Objects.List <- listobjecter(DOY.List); if(verbose){print("1")}
-      DOY.Stack <- stack(DOY.Objects.List); if(verbose){print("2")}
+      DOY.Stack <- stack(annualcrops, bands = DOY); if(verbose){print("2")}
       DOY.Array <- as.array(DOY.Stack); if(verbose){print("3")}
     }
     if(!is.na(PR)){
       if(verbose){print(paste0("Creating Pixel Reliability array... ", Sys.time()))}
-      PR.Objects.List <- listobjecter(PR.List)
-      PR.Stack <- stack(PR.Objects.List)
+      PR.Stack <- stack(annualcrops, bands = PR)
       PR.Array <- as.array(PR.Stack)
     }
 
