@@ -50,51 +50,8 @@ mapPheno <- function(File_List = NA, PhenoFactor = NA,
   annualcrops <- File_List
   pos <- new.env()
 
-  if(verbose){print(paste0("Creating data tiles for each timepoint... ", Sys.time()))}
-
-  # Create object for each datatype at each timepoint
-  if(!is.na(NDVI) && !is.na(VIQ) && !is.na(DOY) && !is.na(PR)){
-    for(i in 1:length(annualcrops)){
-      TileDOY <- substr(annualcrops[i], start = 15, stop = 17)
-      assign(x = paste("NDVITile", TileDOY, sep=""),
-             value = raster(annualcrops[i], band=NDVI),
-             pos = pos)
-      assign(x = paste("VIQTile", TileDOY, sep=""),
-             value = raster(annualcrops[i], band=VIQ),
-             pos = pos)
-      assign(x = paste("DOYTile", TileDOY, sep=""),
-             value = raster(annualcrops[i], band=DOY),
-             pos = pos)
-      assign(x = paste("PRTile", TileDOY, sep=""),
-             value = raster(annualcrops[i], band=PR),
-             pos = pos)
-    }
-  }
-
-  if(!is.na(SnowExtent)){
-    for(i in 1:length(annualcrops)){
-      TileDOY <- substr(annualcrops[i], start = 15, stop = 17)
-      assign(x = paste("SnowExtentTile", TileDOY, sep=""),
-             value = raster(annualcrops[i], band=SnowExtent),
-             pos = pos)
-    }
-  }
-
-  # Create lists of each datatype
-  NDVI.List <- ls(pattern="NDVITile", pos = pos)
-  if(verbose){print(NDVI.List)}
-  VIQ.List <- ls(pattern="VIQTile", pos = pos)
-  DOY.List <- ls(pattern="DOYTile", pos = pos)
-  PR.List <- ls(pattern="PRTile", pos = pos)
-  Extent.List <- ls(pattern="SnowExtentTile", pos = pos)
-
   ## This function transforms a list of strings returned by searching for objects
   ## into a list of objects (required for proper stacking)
-  listobjecter <- function(x){
-    FinalList <- lapply(X = x, FUN = get, envir = pos)
-    return(FinalList)
-  }
-
   if(verbose){print(paste0("Sorting data into 3-dimensional arrays... ", Sys.time()))}
 
   if(PhenoFactor == "VI"){
@@ -106,8 +63,7 @@ mapPheno <- function(File_List = NA, PhenoFactor = NA,
     }
     if(!is.na(NDVI)){
       if(verbose){print(paste0("Creating NDVI array... ", Sys.time()))}
-      NDVI.Objects.List <- listobjecter(NDVI.List);if(verbose){print("1")}
-      NDVI.Stack <- raster::stack(annualcrops, bands = NDVI)
+      NDVI.Stack <- raster::stack(raster(annualcrops, bands = NDVI))
 
       if(verbose){
         print(class(NDVI.Stack))
