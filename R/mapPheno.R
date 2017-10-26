@@ -48,7 +48,7 @@ mapPheno <- function(File_List = NA, PhenoFactor = NA,
                      verbose = F){
 
   annualcrops <- File_List
-  pos <- environment(mapPheno)
+  pos <- new.env()
 
   if(verbose){print(paste0("Creating data tiles for each timepoint... ", Sys.time()))}
 
