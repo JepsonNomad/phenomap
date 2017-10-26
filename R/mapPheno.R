@@ -48,7 +48,6 @@ mapPheno <- function(File_List = NA, PhenoFactor = NA,
                      verbose = F){
 
   annualcrops <- File_List
-  pos <- environment(mapPheno)
 
   if(verbose){print(paste0("Creating data tiles for each timepoint... ", Sys.time()))}
 
@@ -57,17 +56,13 @@ mapPheno <- function(File_List = NA, PhenoFactor = NA,
     for(i in 1:length(annualcrops)){
       TileDOY <- substr(annualcrops[i], start = 15, stop = 17)
       assign(x = paste("NDVITile", TileDOY, sep=""),
-             value = raster(annualcrops[i], band=NDVI),
-             pos = pos)
+             value = raster(annualcrops[i], band=NDVI))
       assign(x = paste("VIQTile", TileDOY, sep=""),
-             value = raster(annualcrops[i], band=VIQ),
-             pos = pos)
+             value = raster(annualcrops[i], band=VIQ))
       assign(x = paste("DOYTile", TileDOY, sep=""),
-             value = raster(annualcrops[i], band=DOY),
-             pos = pos)
+             value = raster(annualcrops[i], band=DOY))
       assign(x = paste("PRTile", TileDOY, sep=""),
-             value = raster(annualcrops[i], band=PR),
-             pos = pos)
+             value = raster(annualcrops[i], band=PR))
     }
   }
 
@@ -75,23 +70,22 @@ mapPheno <- function(File_List = NA, PhenoFactor = NA,
     for(i in 1:length(annualcrops)){
       TileDOY <- substr(annualcrops[i], start = 15, stop = 17)
       assign(x = paste("SnowExtentTile", TileDOY, sep=""),
-             value = raster(annualcrops[i], band=SnowExtent),
-             pos = pos)
+             value = raster(annualcrops[i], band=SnowExtent))
     }
   }
 
   # Create lists of each datatype
-  NDVI.List <- ls(pattern="NDVITile", pos = pos)
+  NDVI.List <- ls(pattern="NDVITile")
   if(verbose){print(NDVI.List)}
-  VIQ.List <- ls(pattern="VIQTile", pos = pos)
-  DOY.List <- ls(pattern="DOYTile", pos = pos)
-  PR.List <- ls(pattern="PRTile", pos = pos)
-  Extent.List <- ls(pattern="SnowExtentTile", pos = pos)
+  VIQ.List <- ls(pattern="VIQTile")
+  DOY.List <- ls(pattern="DOYTile")
+  PR.List <- ls(pattern="PRTile")
+  Extent.List <- ls(pattern="SnowExtentTile")
 
   ## This function transforms a list of strings returned by searching for objects
   ## into a list of objects (required for proper stacking)
   listobjecter <- function(x){
-    FinalList <- lapply(X = x, FUN = get, envir = pos)
+    FinalList <- lapply(X = x, FUN = get)
     return(FinalList)
   }
 
