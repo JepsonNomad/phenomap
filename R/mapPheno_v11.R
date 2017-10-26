@@ -63,7 +63,7 @@ mapPheno <- function(File_List = NA, PhenoFactor = NA,
     }
     if(!is.na(NDVI)){
       if(verbose){print(paste0("Creating NDVI array... ", Sys.time()))}
-      NDVI.Stack <- raster::stack(raster(annualcrops, bands = NDVI))
+      NDVI.Stack <- raster::stack(annualcrops, bands = NDVI)
 
       if(verbose){
         print(class(NDVI.Stack))
