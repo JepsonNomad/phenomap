@@ -63,12 +63,12 @@ mapPheno <- function(File_List = NA, PhenoFactor = NA,
     }
     if(!is.na(NDVI)){
       if(verbose){print(paste0("Creating NDVI array... ", Sys.time()))}
-      NDVI.Array <- array(dim=c(dim(matrix(raster(annualcrops[1])))[1],
-                                dim(matrix(raster(annualcrops[1])))[2],
+      NDVI.Array <- array(dim=c(dim(as.matrix(raster(annualcrops[1])))[1],
+                                dim(as.matrix(raster(annualcrops[1])))[2],
                                 length(annualcrops)),
                           data=NA)
       for(i in 1:length(annualcrops)){
-        NDVI.Array[,,i] <- matrix(raster(annualcrops[i], band=NDVI))
+        NDVI.Array[,,i] <- as.matrix(raster(annualcrops[i], band=NDVI))
       }
       #NDVI.Stack <- stack(annualcrops, bands = NDVI)
 
@@ -78,6 +78,9 @@ mapPheno <- function(File_List = NA, PhenoFactor = NA,
       # }
       #NDVI.Array <- as.array(NDVI.Stack)
       if(verbose){
+        print("Sample NDVI matrix dimensions")
+        print(dim(as.matrix(raster(annualcrops[6], band=NDVI))))
+        print("NDVI.Array dimensions")
         print(dim(NDVI.Array))
         print("3")
       }
@@ -90,12 +93,12 @@ mapPheno <- function(File_List = NA, PhenoFactor = NA,
     if(verbose){print("NDVI cleaned")}
     if(!is.na(VIQ)){
       if(verbose){print(paste0("Creating VI Quality array... ", Sys.time()))}
-      VIQ.Array <- array(dim=c(dim(matrix(raster(annualcrops[1])))[1],
-                               dim(matrix(raster(annualcrops[1])))[2],
+      VIQ.Array <- array(dim=c(dim(as.matrix(raster(annualcrops[1])))[1],
+                               dim(as.matrix(raster(annualcrops[1])))[2],
                                 length(annualcrops)),
                           data=NA)
       for(i in 1:length(annualcrops)){
-        VIQ.Array[,,i] <- matrix(raster(annualcrops[i], band=VIQ))
+        VIQ.Array[,,i] <- as.matrix(raster(annualcrops[i], band=VIQ))
       }
 
       first_k_bits <- function(int, k=16) {
@@ -109,23 +112,23 @@ mapPheno <- function(File_List = NA, PhenoFactor = NA,
     }
     if(!is.na(DOY)){
       if(verbose){print(paste0("Creating Day of Year array... ", Sys.time()))}
-      DOY.Array <- array(dim=c(dim(matrix(raster(annualcrops[1])))[1],
-                               dim(matrix(raster(annualcrops[1])))[2],
+      DOY.Array <- array(dim=c(dim(as.matrix(raster(annualcrops[1])))[1],
+                               dim(as.matrix(raster(annualcrops[1])))[2],
                                length(annualcrops)),
                          data=NA)
       for(i in 1:length(annualcrops)){
-        DOY.Array[,,i] <- matrix(raster(annualcrops[i], band=DOY))
+        DOY.Array[,,i] <- as.matrix(raster(annualcrops[i], band=DOY))
       }
 
     }
     if(!is.na(PR)){
       if(verbose){print(paste0("Creating Pixel Reliability array... ", Sys.time()))}
-      PR.Array <- array(dim=c(dim(matrix(raster(annualcrops[1])))[1],
-                              dim(matrix(raster(annualcrops[1])))[2],
+      PR.Array <- array(dim=c(dim(as.matrix(raster(annualcrops[1])))[1],
+                              dim(as.matrix(raster(annualcrops[1])))[2],
                                length(annualcrops)),
                          data=NA)
       for(i in 1:length(annualcrops)){
-        PR.Array[,,i] <- matrix(raster(annualcrops[i], band=PR))
+        PR.Array[,,i] <- as.matrix(raster(annualcrops[i], band=PR))
       }
 
     }
