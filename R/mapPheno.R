@@ -65,12 +65,14 @@ mapPheno<- function(File_List = NA, PhenoFactor = NA,
     if(!is.na(NDVI)){
       if(verbose){
         print(paste0("Creating NDVI array... ", Sys.time()))
-        print(names(annualcrops))
-        print(row.names(annualcrops) <- NULL)
+        print("Array dimensions... ")
+        print(c(dim(as.matrix(raster(annualcrops[1])))[1],
+              dim(as.matrix(raster(annualcrops[1])))[2],
+              length(annualcrops)))
         }
       NDVI.Array <- array(data=NA,
-                          dim=c(dim(as.matrix(raster(annualcrops[1])))[1],
-                                dim(as.matrix(raster(annualcrops[1])))[2],
+                          dim=c(dim(as.matrix(raster(annualcrops[1]), dimnames = NULL))[1],
+                                dim(as.matrix(raster(annualcrops[1]), dimnames = NULL))[2],
                                 length(annualcrops)),
                           dimnames=NULL)
       if(verbose){print("Created blank array")}
@@ -308,4 +310,4 @@ mapPheno<- function(File_List = NA, PhenoFactor = NA,
 #                            phase = phase, threshold = threshold, year = year,
 #                            NDVI = NDVI, VIQ = VIQ, DOY = DOY, PR = PR,
 #                            verbose = verbose)
-#
+
