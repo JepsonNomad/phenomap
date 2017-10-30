@@ -39,6 +39,7 @@
 #' @importFrom plyr aaply
 #' @importFrom phenex modelNDVI
 #' @importFrom phenex phenoPhase
+#' @importFrom base array
 #' @export
 
 mapPheno<- function(File_List = NA, PhenoFactor = NA,
