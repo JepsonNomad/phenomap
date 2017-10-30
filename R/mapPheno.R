@@ -85,13 +85,13 @@ mapPheno<- function(File_List = NA, PhenoFactor = NA,
       #   print(c("NDVI.Stack dimensions ", dim(NDVI.Stack)))
       # }
       #NDVI.Array <- as.array(NDVI.Stack)
-      if(verbose){
-        print("Sample NDVI matrix dimensions")
-        print(dim(raster::as.matrix(raster(annualcrops[6], band=NDVI))))
-        print("NDVI.Array dimensions")
-        print(dim(NDVI.Array))
-        print("3")
-      }
+      # if(verbose){
+      #   print("Sample NDVI matrix dimensions")
+      #   print(dim(raster::as.matrix(raster(annualcrops[6], band=NDVI))))
+      #   print("NDVI.Array dimensions")
+      #   print(dim(NDVI.Array))
+      #   print("3")
+      # }
 
 
       ## If NDVI is less than 0, it needs to be brought up to 0
