@@ -41,7 +41,7 @@
 #' @importFrom phenex phenoPhase
 #' @export
 
-mapPheno <- function(File_List = NA, PhenoFactor = NA,
+mapPheno<- function(File_List = NA, PhenoFactor = NA,
                      phase = NA, threshold = NA, year = NA,
                      NDVI = NA, VIQ = NA, DOY = NA, PR = NA,
                      SnowExtent = NA,
@@ -62,7 +62,11 @@ mapPheno <- function(File_List = NA, PhenoFactor = NA,
       stop("Crucial Dataset missing (have you included NDVI, VIQ, DOY, and PR layers?)")
     }
     if(!is.na(NDVI)){
-      if(verbose){print(paste0("Creating NDVI array... ", Sys.time()))}
+      if(verbose){
+        print(paste0("Creating NDVI array... ", Sys.time()))
+        print(make.names(names(annualcrops)))
+        print(row.names(annualcrops) <- NULL)
+        }
       NDVI.Array <- array(data=NA,
                           dim=c(dim(as.matrix(raster(annualcrops[1])))[1],
                                 dim(as.matrix(raster(annualcrops[1])))[2],
@@ -98,11 +102,15 @@ mapPheno <- function(File_List = NA, PhenoFactor = NA,
       VIQ.Array <- array(dim=c(dim(as.matrix(raster(annualcrops[1])))[1],
                                dim(as.matrix(raster(annualcrops[1])))[2],
                                 length(annualcrops)),
-                          data=NA)
+                          data=NA); if(verbose){print("Created blank array")}
       for(i in 1:length(annualcrops)){
         VIQ.Array[,,i] <- as.matrix(raster(annualcrops[i], band=VIQ))
       }
-
+      if(verbose){
+        print("Filled VIQ Array")
+        print("VIQ.Array dimensions")
+        print(dim(VIQ.Array))
+      }
       first_k_bits <- function(int, k=16) {
         ## https://lpdaac.usgs.gov/products/modis_products_table/mod13q1 TABLE 2:
         ## MOD13Q1 VI Quality: "Bit 0 is the least significant (read bit words right to left)"
