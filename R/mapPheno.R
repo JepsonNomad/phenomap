@@ -219,10 +219,12 @@ mapPheno<- function(File_List = NA, PhenoFactor = NA,
     ## We want to apply the phenex functions through
     ## time in the FinalNDVI array;
     ## Meaning use aaply in dimensions c(1,2)
+    ifelse(verbose, silent = F, silent = T)
     NDVIFunction <- function(a){
       pixelID <- a
       ndvi <- modelNDVI((pixelID/10000), correction = "none",
-                        method = "DLogistic", year.int=as.integer(year)[[1]])
+                        method = "DLogistic", year.int=as.integer(year),
+                        silent = silent)[[1]]
       springtime <- phenoPhase(ndvi, phase = phase, method = "local", threshold = threshold)[[1]]
       return(springtime)
     }
