@@ -66,18 +66,18 @@ mapPheno<- function(File_List = NA, PhenoFactor = NA,
       if(verbose){
         print(paste0("Creating NDVI array... ", Sys.time()))
         print("Array dimensions... ")
-        print(c(dim(as.matrix(raster(annualcrops[1])))[1],
-              dim(as.matrix(raster(annualcrops[1])))[2],
+        print(c(dim(raster::as.matrix(raster(annualcrops[1])))[1],
+              dim(raster::as.matrix(raster(annualcrops[1])))[2],
               length(annualcrops)))
         }
       NDVI.Array <- array(data=NA,
-                          dim=c(dim(as.matrix(raster(annualcrops[1]), dimnames = NULL))[1],
-                                dim(as.matrix(raster(annualcrops[1]), dimnames = NULL))[2],
+                          dim=c(dim(raster::as.matrix(raster(annualcrops[1]), dimnames = NULL))[1],
+                                dim(raster::as.matrix(raster(annualcrops[1]), dimnames = NULL))[2],
                                 length(annualcrops)),
                           dimnames=NULL)
       if(verbose){print("Created blank array")}
       for(i in 1:length(annualcrops)){
-        NDVI.Array[,,i] <- as.matrix(raster(annualcrops[i], band=NDVI))
+        NDVI.Array[,,i] <- raster::as.matrix(raster(annualcrops[i], band=NDVI))
       }; if(verbose){print("Filled array")}
       #NDVI.Stack <- stack(annualcrops, bands = NDVI)
 
