@@ -222,7 +222,7 @@ mapPheno<- function(File_List = NA, PhenoFactor = NA,
     NDVIFunction <- function(a){
       pixelID <- a
       ndvi <- modelNDVI((pixelID/10000), correction = "none",
-                        method = "DLogistic", year=as.integer(year))[[1]]
+                        method = "DLogistic", year.int=as.integer(year))
       springtime <- phenoPhase(ndvi, phase = phase, method = "local", threshold = threshold)[[1]]
       return(springtime)
     }
