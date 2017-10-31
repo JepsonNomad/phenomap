@@ -202,7 +202,9 @@ mapPheno<- function(File_List = NA, PhenoFactor = NA,
         for (j in 1:ncol(FinalNDVI)){
           colindex <- j
           if (!is.na(DOY.Array[rowindex, colindex, zindex])){
-            year_array[rowindex, colindex, DOY.Array[rowindex, colindex, zindex]] <- FinalNDVI[rowindex,colindex, zindex]
+            if(DOY.Array[rowindex, colindex, zindex] > 0){
+              year_array[rowindex, colindex, DOY.Array[rowindex, colindex, zindex]] <- FinalNDVI[rowindex,colindex, zindex]
+            }
           }
         }
       }
@@ -210,10 +212,13 @@ mapPheno<- function(File_List = NA, PhenoFactor = NA,
 
     if(verbose){
       print(paste0("Converting annual space-time cube into phenoscape... ", Sys.time()))
+      print("NDVI.Array pixel example")
       print(NDVI.Array[12,15,])
+      print("VIQ Processed NDVI pixel example")
       print(FinalNDVI.VIQ[12,15,])
-      print(FinalNDVI[12,15,])
+      print("Composite Day of Year pixel example")
       print(DOY.Array[12,15,])
+      print("Annual space-time cube pixel example")
       print(year_array[12,15,])
     }
 
