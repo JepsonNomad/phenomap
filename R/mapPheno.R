@@ -296,30 +296,3 @@ mapPheno<- function(File_List = NA, PhenoFactor = NA,
   return(phenoscape)
 }
 
-#
-# setwd("/Users/christianjohn/Documents/Post_Lab/Phenoscape/test")
-# list.files()
-# File_List <- list.files(pattern=c("TinyCrop_"))
-# PhenoFactor = "VI"
-# phase = "greenup"
-# threshold = 0.5
-# year = 2016
-# NDVI = 1
-# VIQ = 3
-# DOY = 4
-# PR = 5
-# verbose = TRUE
-#
-# library(phenex)
-# library(rgdal)
-# library(raster)
-# library(stringr)
-# library(plyr)
-# library(dplyr)
-#
-#
-# Sample.Greenup <- mapPheno(File_List = File_List, PhenoFactor = PhenoFactor,
-#                            phase = phase, threshold = threshold, year = year,
-#                            NDVI = NDVI, VIQ = VIQ, DOY = DOY, PR = PR,
-#                            verbose = verbose)
-
