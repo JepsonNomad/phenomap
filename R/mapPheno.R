@@ -174,7 +174,7 @@ mapPheno<- function(File_List = NA, PhenoFactor = NA,
       Possible.Snow.Ice <- as.numeric(substring(Meta, 15))
       Possible.Shadow <- as.numeric(substring(Meta, 16))
       for (i in 1:length(Data)){
-        if (MODLAND.QA[i] > 10){
+        if (MODLAND.QA[i] > 5){
           Data[i] <- NA
         }
         if (VI.Usefulness[i] > 1100){
@@ -186,8 +186,8 @@ mapPheno<- function(File_List = NA, PhenoFactor = NA,
 
     if(verbose){print(paste0("Cleaning NDVI data... ", Sys.time()))}
 
-    #FinalNDVI.PR <- PRcleaner(NDVISet = NDVIcleaned, PRSet = PR.Array)
-    FinalNDVI.VIQ <- VIQcleaner(NDVISet = NDVIcleaned, VIQSet = VIQbinary)
+    FinalNDVI.PR <- PRcleaner(NDVISet = NDVIcleaned, PRSet = PR.Array)
+    FinalNDVI.VIQ <- VIQcleaner(NDVISet = FinalNDVI.PR, VIQSet = VIQbinary)
     FinalNDVI <- FinalNDVI.VIQ
 
     ## Prep your NDVI values for Phenex processing
