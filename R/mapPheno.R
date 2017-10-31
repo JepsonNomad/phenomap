@@ -210,6 +210,10 @@ mapPheno<- function(File_List = NA, PhenoFactor = NA,
 
     if(verbose){
       print(paste0("Converting annual space-time cube into phenoscape... ", Sys.time()))
+      print(NDVI.Array[12,15,])
+      print(FinalNDVI.VIQ[12,15,])
+      print(FinalNDVI[12,15,])
+      print(DOY.Array[12,15,])
       print(year_array[12,15,])
     }
 
