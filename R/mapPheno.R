@@ -96,7 +96,7 @@ mapPheno<- function(File_List = NA, PhenoFactor = NA,
 
       ## If NDVI is less than 0, it needs to be brought up to 0
       NDVIcleaner <- function(x) {x[x<0] <- 0; x};if(verbose){print("cleaner created")}
-      NDVIcleaned <- apply(X = NDVI.Array, MARGIN = c(1,2,3), FUN = NDVIcleaner)
+      NDVIcleaned <- aaply(.data = NDVI.Array, .margins = c(1,2,3), .fun = NDVIcleaner)
     }
     if(verbose){print("NDVI cleaned")}
     if(!is.na(VIQ)){
@@ -120,7 +120,7 @@ mapPheno<- function(File_List = NA, PhenoFactor = NA,
         return(paste(as.character(integer_vector), collapse=""))
       }
 
-      VIQbinary <- apply(X = VIQ.Array, MARGIN = c(1,2,3), FUN = first_k_bits); if(verbose){print("4")}
+      VIQbinary <- aaply(.data = VIQ.Array, .margins = c(1,2,3), .fun = first_k_bits); if(verbose){print("4")}
     }
     if(!is.na(DOY)){
       if(verbose){print(paste0("Creating Day of Year array... ", Sys.time()))}
@@ -210,7 +210,7 @@ mapPheno<- function(File_List = NA, PhenoFactor = NA,
 
     if(verbose){
       print(paste0("Converting annual space-time cube into phenoscape... ", Sys.time()))
-      #print(year_array[120:130,230:240,42])
+      print(year_array[12,15,])
     }
 
     ## Create a matrix to be filled with phenology data
@@ -274,9 +274,9 @@ mapPheno<- function(File_List = NA, PhenoFactor = NA,
 
     # Fill in phenodump with the first date at which x == 25, that is,
     # the first time slice when pixels are detected as completely snow-free
-    phenodump.extent <- apply(X = Complete.Extent.Array,
-                              MARGIN = c(1,2),
-                              FUN = function(x) min(which(x == 25)))
+    phenodump.extent <- aaply(.data = Complete.Extent.Array,
+                              .margins = c(1,2),
+                              .fun = function(x) min(which(x == 25)))
 
     phenoscape <- raster(x = phenodump.extent,
                          template = raster(annualcrops[[1]]))
