@@ -10,6 +10,12 @@ Though landscape phenology is increasingly becoming a focal point of investigati
 
 This package uses methods from the `dplyr`, `phenex`, `plyr`, `raster`, `stringr`, and `rgdal` packages.  I recommend loading the `raster` package so that the product of `mapPheno()` can then be inspected and further processed as needed.
 
+`phenomap` does not support .hdf files, and therefore it is recommended that users download and mosaic data.  I find that [pyModis](https://github.com/lucadelu/pyModis) is a reliable tool for such pursuits.  
+
+## Warning
+
+`phenomap` requires a considerable amount of computing power and even for small datasets it may take a while to process the data.  I therefore recommend cropping datasets to the minimum possible extent and projecting to the coarsest possible resolution.  At this point `phenomap` does not support parallel processing, but it is expected to in future versions.
+
 ## Installation
 ```
 devtools::install_github("JepsonNomad/phenomap")
