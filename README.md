@@ -1,6 +1,6 @@
 # phenomap
 
-This takes in a series of multi-layer raster files and returns a phenology projection raster.
+This takes in a series of multi-layer raster files and returns a phenology projection raster.  `phenomap` is capable of analyzing satellite-derived NDVI and snowmelt time series on a regional or global scale.  Currently 'phenomap' is optimized for data that derives from the MOD 13 and MOD 10 data products, but it is expected that this project will eventually expand to also support GIMMS AVHRR and perhaps Landsat datasets.
 
 ## Motivation
 
