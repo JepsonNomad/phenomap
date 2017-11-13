@@ -1,6 +1,6 @@
 Package: phenomap
 Version: 1.0.1
-Date: 2017-11-10
+Date: 2017-11-13
 Title: Projecting satellite-derived phenology in space
 Authors@R: person("Christian","John",role=c("aut","cre"),email="cjohn@ucdavis.edu")
 Author: Christian John
