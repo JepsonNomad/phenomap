@@ -34,6 +34,7 @@ Sample.Greenup <- mapPheno(File_List = File_List.VI, PhenoFactor = PhenoFactor,
                            phase = "greenup", threshold = threshold, year = year,
                            NDVI = NDVI, VIQ = VIQ, DOY = DOY, PR = PR,
                            verbose = verbose)
+plot(Sample.Greenup)
 ```
 
 To project the timing of senescence, use `phase = "senescence"`:
@@ -42,6 +43,7 @@ Sample.Senescence <- mapPheno(File_List = File_List.VI, PhenoFactor = PhenoFacto
                            phase = "senescence", threshold = threshold, year = year,
                            NDVI = NDVI, VIQ = VIQ, DOY = DOY, PR = PR,
                            verbose = verbose)
+plot(Sample.Senescence)
 ```
 
 To inspect broad measures of timing, compare histograms:
@@ -53,6 +55,14 @@ hist(as.matrix(Sample.Senescence), breaks=breaks, ylim=c(0,150),
      xlab="Day of Year")
 hist(as.matrix(Sample.Greenup), breaks=breaks,
      col="palegreen", add=T)
+```
+
+To project the duration of the growing season, compare greenup and senescence rasters:
+
+```
+Growing.Season <- as.matrix(Sample.Senescence) - as.matrix(Sample.Greenup)
+GS.raster <- raster(Growing.Season, template = Sample.Greenup)
+plot(GS.raster)
 ```
 
 ## License 
