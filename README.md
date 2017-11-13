@@ -8,6 +8,8 @@ Though landscape phenology is increasingly becoming a focal point of investigati
 
 ## Prerequisistes
 
+`phenomap` requires at least R version 3.4.2, and has been tested on Mac OSX El Capitan v10.11.6 and Windows 7.
+
 This package uses methods from the `dplyr`, `phenex`, `plyr`, `raster`, `stringr`, and `rgdal` packages.  I recommend loading the `raster` package so that the product of `mapPheno()` can then be inspected and further processed as needed.
 
 `phenomap` does not support .hdf files, and therefore it is recommended that users download and mosaic data.  I find that [pyModis](https://github.com/lucadelu/pyModis) is a reliable tool for such pursuits.  
@@ -17,8 +19,14 @@ This package uses methods from the `dplyr`, `phenex`, `plyr`, `raster`, `stringr
 `phenomap` requires a considerable amount of computing power and even for small datasets it may take a while to process the data.  I therefore recommend cropping datasets to the minimum possible extent and projecting to the coarsest possible resolution.  At this point `phenomap` does not support parallel processing, but it is expected to in future versions.
 
 ## Installation
+
+Use devtools to install this package...
 ```
 devtools::install_github("JepsonNomad/phenomap")
+```
+... until it is available on CRAN, at which point install `phenomap` using
+```
+install.packages(phenomap)
 ```
 
 ## Code example
