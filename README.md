@@ -32,7 +32,7 @@ install.packages(phenomap)
 ## Code example
 ```
 library(phenomap)
-File_List.VI <- list.files(pattern="TeenyCrop")
+File_List.VI <- list.files(pattern="TeenyCrop") # these files can be found in the /inst/extdata folder
 PhenoFactor = "VI"
 threshold = 0.5
 year = 2016
