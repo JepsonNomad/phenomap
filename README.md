@@ -4,7 +4,7 @@ This takes in a series of multi-layer raster files and returns a phenology proje
 
 ## Motivation
 
-Though landscape phenology is increasingly becoming a focal point of investigations of migration timing, hitherto no R packages existed that were able to reconstruct satellite-derived phenological metrics in space.  Thus, it was my motivation to develop this package *en passant* with John 2016 in order to enable a broader group of researchers to project landscape timing measures in space.  
+Though landscape phenology is increasingly becoming a focal point of investigations of migration timing, hitherto no R packages existed that were able to reconstruct satellite-derived phenological metrics in space.  Thus, it was my motivation to develop this package *en passant* with John 2016 (M.S. thesis in ecology) in order to enable a broader group of researchers to project landscape timing measures in space.  
 
 ## Prerequisistes
 
