@@ -34,6 +34,7 @@
 #'                            SnowExtent=SnowExtent,
 #'                            verbose = verbose)'
 #' }
+#' @examples
 #' \dontrun{
 #' fpath <- system.file("extdata", package="phenomap")
 #' File_List <- paste(fpath, list.files(path = fpath, pattern=c("TinyCrop_")), sep="/")

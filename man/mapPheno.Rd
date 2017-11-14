@@ -37,3 +37,26 @@ Raster object with extent=extent(raster(File_List)[1]) and CRS = crs(raster(File
 \description{
 Convert a series of raster files to a single phenology raster.
 }
+\examples{
+\dontrun{
+fpath <- system.file("extdata", package="phenomap")
+File_List <- paste(fpath, list.files(path = fpath, pattern=c("TinyCrop_")), sep="/")
+File_List
+
+PhenoFactor = "VI"
+phase = "greenup"
+threshold = 0.5
+year = 2016
+NDVI = 1
+VIQ = 3
+DOY = 4
+PR = 5
+verbose = TRUE
+
+Sample.Greenup <- mapPheno(File_List = File_List, PhenoFactor = PhenoFactor,
+                           phase = phase, threshold = threshold, year = year,
+                           NDVI = NDVI, VIQ = VIQ, DOY = DOY, PR = PR,
+                           SnowExtent=SnowExtent,
+                           verbose = verbose)
+}
+}
