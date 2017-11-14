@@ -1,2 +1,4 @@
-README.md
-cran-comments.md
+^.*\.Rproj$
+^\.Rproj\.user$
+^cran-comments\.md$
+^README\.md$
