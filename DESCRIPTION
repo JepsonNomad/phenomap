@@ -1,0 +1,13 @@
+Package: phenomap
+Title: Projecting Satellite-Derived Phenology in Space
+Version: 1.0.1
+Date: 2017-11-13
+Authors@R: person("Christian", "John", email="cjohn@ucdavis.edu", role=c("aut","cre"))
+Maintainer: Christian John <cjohn@ucdavis.edu>
+Depends: R (>= 3.4.2) 
+Imports: dplyr, phenex, plyr, raster, stringr, rgdal
+Description: This takes in a series of multi-layer raster files and returns a phenology projection raster, following methodologies described in John (2016) <https://etda.libraries.psu.edu/catalog/13521clj5135>.
+License: GPL-3
+URL: https://github.com/JepsonNomad/phenomap
+BugReports: https://github.com/JepsonNomad/phenomap/issues
+RoxygenNote: 6.0.1.9000
