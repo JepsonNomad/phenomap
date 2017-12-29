@@ -16,7 +16,7 @@ This package uses methods from the `dplyr`, `phenex`, `plyr`, `raster`, `stringr
 
 ## Warning
 
-`phenomap` requires a considerable amount of computing power and even for small datasets it may take a while to process the data.  I therefore recommend cropping datasets to the minimum possible extent and projecting to the coarsest possible resolution.  At this point `phenomap` does not support parallel processing, but it is expected to in future versions.
+`phenomap` requires a considerable amount of computing power and even for small datasets it may take a while to process the data.  I therefore recommend cropping datasets to the minimum possible extent and projecting to the coarsest possible resolution.  This dev version of `phenomap` aims to support parallel processing, but it is expected to be especially buggy in early versions, but improve in future versions.
 
 ## Installation
 
