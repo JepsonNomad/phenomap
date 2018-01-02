@@ -20,13 +20,13 @@ This package uses methods from the `dplyr`, `phenex`, `plyr`, `raster`, `stringr
 
 ## Installation
 
-Use devtools to install this package...
-```
-devtools::install_github("JepsonNomad/phenomap")
-```
-... until it is available on CRAN, at which point install `phenomap` using
+Use CRAN to install this package.
 ```
 install.packages(phenomap)
+```
+For the most up-to-date beta version, install `phenomap` using
+```
+devtools::install_github("JepsonNomad/phenomap", ref="v_1.1.3.9000")
 ```
 
 ## Code example
