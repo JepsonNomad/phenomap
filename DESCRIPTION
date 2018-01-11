@@ -1,7 +1,7 @@
 Package: phenomap
 Title: Projecting Satellite-Derived Phenology in Space
-Version: 1.0.1
-Date: 2017-11-13
+Version: 1.1.4
+Date: 2018-1-11
 Authors@R: person("Christian", "John", email="cjohn@ucdavis.edu", role=c("aut","cre"))
 Maintainer: Christian John <cjohn@ucdavis.edu>
 Depends: R (>= 3.4.2) 
