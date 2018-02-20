@@ -79,6 +79,41 @@ GS.raster <- raster(Growing.Season, template = Sample.Greenup)
 plot(GS.raster)
 ```
 
+To project long-term trends in green-up timing, use a series of green-up rasters (produced using `mapPheno`) for the File_List.  
+
+```
+# You'll need to make a series of green-up rasters for this:
+File_List.Trend <- c("Sample_Greenup_2001.tif",
+                     "Sample_Greenup_2002.tif",
+                     "Sample_Greenup_2003.tif",
+                     "Sample_Greenup_2004.tif",
+                     "Sample_Greenup_2005.tif",
+                     "Sample_Greenup_2006.tif",
+                     "Sample_Greenup_2007.tif",
+                     "Sample_Greenup_2008.tif",
+                     "Sample_Greenup_2009.tif",
+                     "Sample_Greenup_2010.tif",
+                     "Sample_Greenup_2011.tif",
+                     "Sample_Greenup_2012.tif",
+                     "Sample_Greenup_2013.tif",
+                     "Sample_Greenup_2014.tif",
+                     "Sample_Greenup_2015.tif",
+                     "Sample_Greenup_2016.tif")
+
+Year_List <- 2001:2016 # Tell it what years you're using
+n.cores <- 4 # Set up parallel computing
+
+phenotrend <- trend.phenomap(File_List = File_List.Trend,
+                             Year_List = Year_List,
+                             parallel = TRUE,
+                             n.cores = n.cores,
+                             verbose=TRUE)
+
+hist(as.matrix(phenotrend), breaks=100)
+mean(as.matrix(phenotrend), na.rm=T)
+std.error(as.matrix(phenotrend), na.rm=T)
+```
+
 ## License 
 
 This project is licensed under the GPL-3 license.
