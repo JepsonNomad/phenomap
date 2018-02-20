@@ -1,60 +1,43 @@
 #' Convert a series of raster files to a single phenology raster.
 #'
 #' @param File_List List of phenology raster files (i.e. those produced in `mapPheno`)
-#' @param Year_List Integer Year (YYYY)
+#' @param Year_List Vector of Integer Year (YYYY) with length > 5
 #' @param parallel TRUE or FALSE (Default = FALSE) if TRUE, use parallel backend through plyr::aaply
 #' @param n.cores Integer number of cores to be used for parallel processing (only use if parallel = TRUE)
 #' @param verbose TRUE or FALSE (Default = FALSE)
-#' @return Raster object with extent=extent(raster(File_List)[1]) and CRS = crs(raster(File_List)[1]).  Digital numbers are expressed as Day of Year.
+#' @return Raster object with extent=extent(raster(File_List)[1]) and CRS = crs(raster(File_List)[1]).  Layer 1 is the slope estimate of the linear model relating green-up timing (Day of Year) to time (Year).  Layer 2 is the p-value of the slope estimate.  Layer 3 is the standard error of the slope estimate.  Layer 4 is the r-squared value for the linear model.
 #' @examples
 #' \dontshow{
-#' fpath <- system.file("extdata", package="phenomap")
-#' File_List <- paste(fpath, list.files(path = fpath, pattern=c("ExCrop_")), sep="/")
-#' File_List <- File_List[1:2]
+#' File_List.Trend <- paste(fpath, list.files(path = fpath, pattern=c("Ex_Greenup_")), sep="/")
 #'
-#' PhenoFactor = "VI"
-#' phase = "greenup"
-#' threshold = 0.5
-#' year = 2016
-#' NDVI = 1
-#' VIQ = 3
-#' DOY = 4
-#' PR = 5
-#' parallel = FALSE
-#' n.cores = NA
-#' verbose = TRUE
+#' Year_List <- 2001:2016 # Tell it what years you're using
+#' n.cores <- NA
 #'
-#' Sample.Greenup <- mapPheno(File_List = File_List, PhenoFactor = PhenoFactor,
-#'                            phase = phase, threshold = threshold, year = year,
-#'                            NDVI = NDVI, VIQ = VIQ, DOY = DOY, PR = PR,
-#'                            SnowExtent=SnowExtent,
-#'                            parallel = parallel, n.cores = n.cores,
-#'                            verbose = verbose)
+#' phenotrend <- trend.phenomap(File_List = File_List.Trend,
+#'                              Year_List = Year_List,
+#'                              parallel = FALSE,
+#'                              n.cores = n.cores,
+#'                              verbose=TRUE)
+#'
 #' }
 #' \dontrun{
 #'
 #' fpath <- system.file("extdata", package="phenomap")
-#' File_List <- paste(fpath, list.files(path = fpath, pattern=c("TinyCrop_")), sep="/")
-#' File_List
+#' File_List.Trend <- paste(fpath, list.files(path = fpath, pattern=c("Sample_Greenup_")), sep="/")
 #'
-#' PhenoFactor = "VI"
-#' phase = "greenup"
-#' threshold = 0.5
-#' year = 2016
-#' NDVI = 1
-#' VIQ = 3
-#' DOY = 4
-#' PR = 5
-#' parallel = FALSE
-#' n.cores = NA
-#' verbose = TRUE
+#' Year_List <- 2001:2016 # Tell it what years you're using
+#' n.cores <- 4 # Set up parallel computing
 #'
-#' Sample.Greenup <- mapPheno(File_List = File_List, PhenoFactor = PhenoFactor,
-#'                            phase = phase, threshold = threshold, year = year,
-#'                            NDVI = NDVI, VIQ = VIQ, DOY = DOY, PR = PR,
-#'                            SnowExtent = SnowExtent,
-#'                            parallel = parallel, n.cores = n.cores,
-#'                            verbose = verbose)
+#' phenotrend <- trend.phenomap(File_List = File_List.Trend,
+#'                              Year_List = Year_List,
+#'                              parallel = TRUE,
+#'                              n.cores = n.cores,
+#'                              verbose=TRUE)
+#'
+#' plot(phenotrend)
+#' hist(as.matrix(phenotrend), breaks=100)
+#' mean(as.matrix(phenotrend), na.rm=T)
+#' std.error(as.matrix(phenotrend), na.rm=T)
 #'
 #' }
 #' @import dplyr
