@@ -82,36 +82,33 @@ plot(GS.raster)
 To project long-term trends in green-up timing, use a series of green-up rasters (produced using `mapPheno`) for the File_List.  
 
 ```
-# You'll need to make a series of green-up rasters for this:
-File_List.Trend <- c("Sample_Greenup_2001.tif",
-                     "Sample_Greenup_2002.tif",
-                     "Sample_Greenup_2003.tif",
-                     "Sample_Greenup_2004.tif",
-                     "Sample_Greenup_2005.tif",
-                     "Sample_Greenup_2006.tif",
-                     "Sample_Greenup_2007.tif",
-                     "Sample_Greenup_2008.tif",
-                     "Sample_Greenup_2009.tif",
-                     "Sample_Greenup_2010.tif",
-                     "Sample_Greenup_2011.tif",
-                     "Sample_Greenup_2012.tif",
-                     "Sample_Greenup_2013.tif",
-                     "Sample_Greenup_2014.tif",
-                     "Sample_Greenup_2015.tif",
-                     "Sample_Greenup_2016.tif")
+# Use a list of green-up rasters.  Here, `File_List.Trend` finds the sample green-up rasters spanning 2011-2016.
+File_List.Trend <- list.files(pattern = "Sample_Greenup")
 
-Year_List <- 2001:2016 # Tell it what years you're using
+Year_List <- 2011:2016 # Tell it what years you're using
+parallel <- TRUE
 n.cores <- 4 # Set up parallel computing
 
-phenotrend <- trend.phenomap(File_List = File_List.Trend,
-                             Year_List = Year_List,
-                             parallel = TRUE,
-                             n.cores = n.cores,
-                             verbose=TRUE)
+phenotrend <- phenomap::mapTrend(File_List = File_List.Trend,
+                                 Year_List = Year_List,
+                                 parallel = parallel,
+                                 n.cores = n.cores,
+                                 verbose=TRUE)
 
-hist(as.matrix(phenotrend), breaks=100)
-mean(as.matrix(phenotrend), na.rm=T)
-std.error(as.matrix(phenotrend), na.rm=T)
+writeRaster(phenotrend, filename="Sample_phenotrend.tif")
+
+coef <- raster("Sample_phenotrend.tif", band = 1)
+plot(coef)
+p <- raster("Sample_phenotrend.tif", band = 2)
+plot(p)
+se <- raster("Sample_phenotrend.tif", band = 3)
+plot(se)
+R2 <- raster("Sample_phenotrend.tif", band = 4)
+plot(R2)
+
+hist(as.matrix(coef), breaks=100)
+mean(as.matrix(coef), na.rm=T)
+plotrix::std.error(c(as.matrix(coef)), na.rm=T)
 ```
 
 ## License 
