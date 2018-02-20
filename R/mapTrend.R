@@ -68,10 +68,6 @@
 #' @export
 # mapTrend added to phenomap v1.1.6
 
-library(raster)
-library(plyr)
-library(doParallel)
-
 mapTrend <- function(File_List,
                      Year_List,
                      parallel = FALSE,
