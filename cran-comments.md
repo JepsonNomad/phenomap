@@ -1,6 +1,6 @@
 ## Note:
 
-* This submission is a revision from a recent submission that was rejected.  I have updated the DESCRIPTION file to include a reference (though unfortunately no arxiv or doi is available; it is a thesis) with appropriately formatted url, fixed the T/F vs. TRUE/FALSE issue, and included a \dontshow example for the system's automated checking process.  The \dontshow example runs the mapPheno function with a small subset of data.
+* This submission is an updated version of an existing package on CRAN.
 
 
 ## Test environments
@@ -10,7 +10,8 @@
 
 ## R CMD check results
 
-0 ERRORs | 0 WARNINGs | 0 NOTEs.
+R CMD check results
+0 errors | 0 warnings | 0 notes
 
 Warning message:
 roxygen2 requires Encoding: UTF-8 
