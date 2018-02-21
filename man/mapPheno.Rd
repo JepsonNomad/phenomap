@@ -6,7 +6,7 @@
 \usage{
 mapPheno(File_List = NA, PhenoFactor = NA, phase = NA, threshold = NA,
   year = NA, NDVI = NA, VIQ = NA, DOY = NA, PR = NA,
-  SnowExtent = NA, verbose = FALSE)
+  SnowExtent = NA, parallel = FALSE, n.cores = NA, verbose = FALSE)
 }
 \arguments{
 \item{File_List}{List of raster files}
@@ -29,6 +29,10 @@ mapPheno(File_List = NA, PhenoFactor = NA, phase = NA, threshold = NA,
 
 \item{SnowExtent}{Integer Band number of Maximum_Snow_Extent in raster files}
 
+\item{parallel}{TRUE or FALSE (Default = FALSE) if TRUE, use parallel backend through plyr::aaply}
+
+\item{n.cores}{Integer number of cores to be used for parallel processing (only use if parallel = TRUE)}
+
 \item{verbose}{TRUE or FALSE (Default = FALSE)}
 }
 \value{
@@ -38,7 +42,32 @@ Raster object with extent=extent(raster(File_List)[1]) and CRS = crs(raster(File
 Convert a series of raster files to a single phenology raster.
 }
 \examples{
+\dontshow{
+fpath <- system.file("extdata", package="phenomap")
+File_List <- paste(fpath, list.files(path = fpath, pattern=c("ExCrop_")), sep="/")
+File_List <- File_List[1:2]
+
+PhenoFactor = "VI"
+phase = "greenup"
+threshold = 0.5
+year = 2016
+NDVI = 1
+VIQ = 3
+DOY = 4
+PR = 5
+parallel = FALSE
+n.cores = NA
+verbose = FALSE
+
+Sample.Greenup <- mapPheno(File_List = File_List, PhenoFactor = PhenoFactor,
+                           phase = phase, threshold = threshold, year = year,
+                           NDVI = NDVI, VIQ = VIQ, DOY = DOY, PR = PR,
+                           SnowExtent=SnowExtent,
+                           parallel = parallel, n.cores = n.cores,
+                           verbose = verbose)
+}
 \dontrun{
+
 fpath <- system.file("extdata", package="phenomap")
 File_List <- paste(fpath, list.files(path = fpath, pattern=c("TinyCrop_")), sep="/")
 File_List
@@ -51,12 +80,16 @@ NDVI = 1
 VIQ = 3
 DOY = 4
 PR = 5
+parallel = FALSE
+n.cores = NA
 verbose = TRUE
 
 Sample.Greenup <- mapPheno(File_List = File_List, PhenoFactor = PhenoFactor,
                            phase = phase, threshold = threshold, year = year,
                            NDVI = NDVI, VIQ = VIQ, DOY = DOY, PR = PR,
-                           SnowExtent=SnowExtent,
+                           SnowExtent = SnowExtent,
+                           parallel = parallel, n.cores = n.cores,
                            verbose = verbose)
+
 }
 }
