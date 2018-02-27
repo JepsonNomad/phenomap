@@ -8,7 +8,7 @@ Though landscape phenology is increasingly becoming a focal point of investigati
 
 ## Prerequisites
 
-`phenomap` requires at least R version 3.4.2, and has been tested on Mac OSX El Capitan v10.11.6 and Windows 7.
+`phenomap` requires at least R version 3.4.0, and has been tested on Mac OSX El Capitan v10.11.6 and Windows 7.
 
 This package uses methods from the `dplyr`, `phenex`, `plyr`, `raster`, `stringr`, and `rgdal` packages.  I recommend loading the `raster` package so that the product of `mapPheno()` can then be inspected and further processed as needed.
 
