@@ -7,7 +7,7 @@ Maintainer: Christian John <cjohn@ucsb.edu>
 Depends: R (>= 4.1.0) 
 Imports: phenex, plyr, stringr, terra, doParallel
 Description: This takes in a series of multi-layer raster files and returns a phenology projection raster, following methodologies described in John (2016) <https://etda.libraries.psu.edu/catalog/13521clj5135>.
-License: GPL-3 + file LICENSE
+License: GPL-3
 URL: https://github.com/JepsonNomad/phenomap
 BugReports: https://github.com/JepsonNomad/phenomap/issues
 RoxygenNote: 7.1.2
