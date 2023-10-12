@@ -1,11 +1,11 @@
-#' Convert a series of phenology raster files to a single long-term trend raster.
+#' Convert a series of phenology terra::raster files to a single long-term trend terra::raster.
 #'
-#' @param File_List List of phenology raster files (i.e. those produced in `mapPheno`)
+#' @param File_List List of phenology terra::raster files (i.e. those produced in `mapPheno`)
 #' @param Year_List Vector of Integer Year (YYYY) with length > 5
 #' @param parallel TRUE or FALSE (Default = FALSE) if TRUE, use parallel backend through plyr::aaply
 #' @param n.cores Integer number of cores to be used for parallel processing (only use if parallel = TRUE)
 #' @param verbose TRUE or FALSE (Default = FALSE)
-#' @return Raster object with extent=extent(raster(File_List)[1]) and CRS = crs(raster(File_List)[1]).  Layer 1 is the slope estimate of the linear model relating green-up timing (Day of Year) to time (Year).  Layer 2 is the p-value of the slope estimate.  Layer 3 is the standard error of the slope estimate.  Layer 4 is the r-squared value for the linear model.
+#' @return terra::raster object with extent=ext(rast(File_List)[1]) and CRS = crs(rast(File_List)[1]).  Layer 1 is the slope estimate of the linear model relating green-up timing (Day of Year) to time (Year).  Layer 2 is the p-value of the slope estimate.  Layer 3 is the standard error of the slope estimate.  Layer 4 is the r-squared value for the linear model.
 #' @examples
 #' \dontshow{
 #' fpath <- system.file("extdata", package="phenomap")
@@ -36,11 +36,8 @@
 #'                              verbose=TRUE)
 #'
 #' }
-#' @import dplyr
-#' @import rgdal
 #' @import stringr
-#' @importFrom raster raster
-#' @importFrom raster stack
+#' @import terra
 #' @importFrom plyr aaply
 #' @importFrom doParallel registerDoParallel
 #' @importFrom phenex phenoPhase
@@ -64,12 +61,13 @@ mapTrend <- function(File_List,
   if(verbose){print(myfiles)}
   if(verbose){print(Sys.time())}
 
-  phenostack <- stack(lapply(X = myfiles, MARGIN = 1, FUN = raster))
+  phenostack <- terra::rast(lapply(X = myfiles,
+                                   FUN = terra::rast))
   if(verbose){
     print("Stack created")
   }
 
-  phenostack.array <- raster::as.array(phenostack)
+  phenostack.array <- terra::as.array(phenostack)
   if(verbose){
     print(utils::str(phenostack.array))
   }
@@ -136,37 +134,37 @@ mapTrend <- function(File_List,
   }
 
   # extract the linear trend; dump to a trend array
-  trend.array <- aaply(.data = phenostack.array,
-                       .margins = c(1,2),
-                       .fun = trend.extraktor,
-                       .parallel = parallel)
+  trend.array <- plyr::aaply(.data = phenostack.array,
+                             .margins = c(1,2),
+                             .fun = trend.extraktor,
+                             .parallel = parallel)
   if(verbose){
     print("Trend data dumped")
     print(Sys.time())
   }
 
-  sig.array <- aaply(.data = phenostack.array,
-                     .margins = c(1,2),
-                     .fun = sig.extraktor,
-                     .parallel = parallel)
+  sig.array <- plyr::aaply(.data = phenostack.array,
+                           .margins = c(1,2),
+                           .fun = sig.extraktor,
+                           .parallel = parallel)
   if(verbose){
     print("Significance data dumped")
     print(Sys.time())
   }
 
-  se.array <- aaply(.data = phenostack.array,
-                    .margins = c(1,2),
-                    .fun = se.extraktor,
-                    .parallel = parallel)
+  se.array <- plyr::aaply(.data = phenostack.array,
+                          .margins = c(1,2),
+                          .fun = se.extraktor,
+                          .parallel = parallel)
   if(verbose){
     print("Standard error data dumped")
     print(Sys.time())
   }
 
-  R2.array <- aaply(.data = phenostack.array,
-                    .margins = c(1,2),
-                    .fun = R2.extraktor,
-                    .parallel = parallel)
+  R2.array <- plyr::aaply(.data = phenostack.array,
+                          .margins = c(1,2),
+                          .fun = R2.extraktor,
+                          .parallel = parallel)
   if(verbose){
     print("R^2 data dumped")
     print(Sys.time())
@@ -180,8 +178,8 @@ mapTrend <- function(File_List,
   }
 
   trend.list <- list(trend.array,sig.array,se.array,R2.array)
-  raster.list <- lapply(trend.list, raster, template = raster(File_List[[1]]))
-  trend.raster <- stack(raster.list)
+  raster.list <- lapply(trend.list, terra::rast)
+  trend.raster <- terra::rast(raster.list)
 
   names(trend.raster) <- c("Coefficient","P","Std.Error","R2")
 

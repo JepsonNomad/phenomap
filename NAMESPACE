@@ -2,12 +2,9 @@
 
 export(mapPheno)
 export(mapTrend)
-import(dplyr)
-import(rgdal)
 import(stringr)
+import(terra)
 importFrom(doParallel,registerDoParallel)
 importFrom(phenex,modelNDVI)
 importFrom(phenex,phenoPhase)
 importFrom(plyr,aaply)
-importFrom(raster,raster)
-importFrom(raster,stack)

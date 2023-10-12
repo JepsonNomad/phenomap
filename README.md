@@ -6,11 +6,11 @@ This takes in a series of multi-layer raster files and returns a phenology proje
 
 Though landscape phenology is increasingly becoming a focal point of investigations of migration timing, hitherto no R packages existed that were able to reconstruct satellite-derived phenological metrics in space.  Thus, it was my motivation to develop this package *en passant* with John 2016 (M.S. thesis in ecology) in order to enable a broader group of researchers to project landscape timing measures in space.  
 
-## Prerequisites
+## Prerequisistes
 
-`phenomap` requires at least R version 3.4.0, and has been tested on Mac OSX El Capitan v10.11.6 and Windows 7.
+`phenomap` requires at least R version 4.1.0, and has been tested on Mac OSX Monterey v12.3.1 and Windows 7.
 
-This package uses methods from the `dplyr`, `phenex`, `plyr`, `raster`, `stringr`, and `rgdal` packages.  I recommend loading the `raster` package so that the product of `mapPheno()` can then be inspected and further processed as needed.
+This package uses methods from the `plyr` and `stringr`, and most importantly `phenex` and `terra` packages.  I recommend loading the `terra` package so that the product of `mapPheno()` can then be inspected and further processed as needed.
 
 `phenomap` does not support .hdf files, and therefore it is recommended that users download and mosaic data.  I find that [pyModis](https://github.com/lucadelu/pyModis) is a reliable tool for such pursuits.  
 
@@ -77,38 +77,6 @@ To project the duration of the growing season, compare greenup and senescence ra
 Growing.Season <- as.matrix(Sample.Senescence) - as.matrix(Sample.Greenup)
 GS.raster <- raster(Growing.Season, template = Sample.Greenup)
 plot(GS.raster)
-```
-
-To project long-term trends in green-up timing, use a series of green-up rasters (produced using `mapPheno`) for the File_List.  
-
-```
-# Use a list of green-up rasters.  Here, `File_List.Trend` finds the sample green-up rasters spanning 2011-2016.
-File_List.Trend <- list.files(pattern = "Sample_Greenup")
-
-Year_List <- 2011:2016 # Tell it what years you're using
-parallel <- TRUE
-n.cores <- 4 # Set up parallel computing
-
-phenotrend <- phenomap::mapTrend(File_List = File_List.Trend,
-                                 Year_List = Year_List,
-                                 parallel = parallel,
-                                 n.cores = n.cores,
-                                 verbose=TRUE)
-
-writeRaster(phenotrend, filename="Sample_phenotrend.tif")
-
-coef <- raster("Sample_phenotrend.tif", band = 1)
-plot(coef)
-p <- raster("Sample_phenotrend.tif", band = 2)
-plot(p)
-se <- raster("Sample_phenotrend.tif", band = 3)
-plot(se)
-R2 <- raster("Sample_phenotrend.tif", band = 4)
-plot(R2)
-
-hist(as.matrix(coef), breaks=100)
-mean(as.matrix(coef), na.rm=T)
-plotrix::std.error(c(as.matrix(coef)), na.rm=T)
 ```
 
 ## License 
