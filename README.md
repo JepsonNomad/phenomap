@@ -75,7 +75,7 @@ To project the duration of the growing season, compare greenup and senescence ra
 
 ```
 Growing.Season <- as.matrix(Sample.Senescence) - as.matrix(Sample.Greenup)
-GS.raster <- raster(Growing.Season, template = Sample.Greenup)
+GS.raster <- rast(Growing.Season)
 plot(GS.raster)
 ```
 
